@@ -32,3 +32,16 @@ De BAG service heeft, zoals de meeste WFS services, meerdere lagen. Het kán zij
 We moeten dus specifieker zijn: aangevan dat we de _panden_ uit de service willen halen. Dat kan door de laagnaam achter de URL (en eventueel de BBOX) toe te voegen in het commando:
 
 `ogr2ogr /home/willem/test/resultaten.gpkg WFS:"https://service.pdok.nl/lv/bag/wfs/v2_0?bbox=136000,456000,137000,457000" pand -overwrite -nln pand -nlt polygon`
+
+## BAG panden: filter
+Een andere manier om een beperkte dataset uit een service binnen te halen is een SQL-filter. Je kan zo'n filter niet alleen gebruiken om de hoeveelheid objecten te beperken, maar bijvoorbeeld ook om alleen bepaalde attributen mee te laten komen in plaats van simpelweg álle attributen. Zelfs ruimtelijke selecties (binnen één en dezelfde service) zijn mogelijk, mits de service dat zelf faciliteert. 
+
+Er is echter een grote 'maar', en dat is dat je, zo gauw je een SQL-filter gebruikt, je niet tegelijkertijd ook de BBOX optie kan gebruiken. Het is dus óf óf. 
+
+Laten we eens proberen de historische panden binnen te halen: alleen die met een bouwjaar vóór 1400. 
+Probeer uit één van de vorige commandoregels een nieuwe regel samen te stellen. Als extra argument hebben we nu '-sql' nodig: `-sql "SELECT * FROM pand WHERE bouwjaar < 1400"`
+
+* Dit zal wel lukken
+* Combi met woonplaatsen: ruimtelijke join met één woonplaats. Foutmeldingen. Capabilities document.
+* oude panden in één gemeente: identificatie like ´'
+* ODR opendata: wél een ruimtelijke query
