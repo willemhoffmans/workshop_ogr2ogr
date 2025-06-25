@@ -14,7 +14,7 @@ De workshop kent drie delen:
 
 We werken in principe in een geopackage. Dit is een eenvoudige database die je 'on the fly' aan kan maken, en waarin je meerdere datasets kwijt kan. Een geopackage bestaat (in tegenstelling tot een 'echte' database) uit één file die je zonder pardon kan hernoemen of verwijderen als je dat nodig vindt.
 
-Mocht je de beschikking hebben over (bijvoorbeeld) een PostGIS database en daar liever in werken? Geen probleem, de tools die in deze workshop worden behandeld werken op exact dezelfde manier in PostGIS: [hier](./ogr2ogr_postgis) een stukje uitleg wat je eraan moet veranderen. Uiteraard heb je wel schrijfrechten in de database nodig!
+Mocht je de beschikking hebben over (bijvoorbeeld) een PostGIS database en daar liever in werken? Geen probleem, de tools die in deze workshop worden behandeld werken op exact dezelfde manier in PostGIS: [hier](./ogr2ogr_postgis.md) een stukje uitleg wat je eraan moet veranderen. Uiteraard heb je wel schrijfrechten in de database nodig!
 
 We gaan er bij de workshop vanuit dat je een laptop hebt waar ogr2ogr op geïnstalleerd staat. Heb je QGIS, dan heb je ook ogr2ogr. Zie [Activeren ogr2ogr](#activeren)
 
