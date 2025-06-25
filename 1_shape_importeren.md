@@ -16,3 +16,12 @@ Een paar dingen hierbij:
 
 Voor een compleet overzicht van alle opties in ogr2ogr, zie [GDAL documentatie](https://gdal.org/en/stable/programs/ogr2ogr.html)
 Al snel zullen we zien dat we een aantal van de extra opties goed kunnen gebruiken. 
+
+Een optie die we meteen bij de eerste actie maar even introduceren is de `-f` optie. Hiermee bepalen we wat het uitvoerformaat moet zijn. Het is vrij gebruikelijk om deze optie vooraan in de commandoregel te zetten, in tegenstelling tot de (meeste) andere opties. Maar, zoals gezegd, hier ben je in principe vrij in. 
+
+Als we een geopackage maken (of een dataset eraan toe willen voegen) is dit "GPKG". Als optie krijgen we dan dus `-f "GPKG"`. Dit gaan we dus nu toepassen.
+
+## Een shapefile naar een geopackage converteren
+
+
+
