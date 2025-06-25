@@ -33,15 +33,24 @@ Check vervolgens of je ogr2ogr aan de praat krijgt door in te tikken:
 
 `ogr2ogr`
 
-Zet het path naar QGIS in de environment variables, zodat we GDAL commandline tools kunnen gebruiken.
+Veel kans dat je een melding krijgt dat het commando niet gevonden is:
+![command not found](ogr2ogr_command_not_found.png)
 
-Voorbeelddirectory: C:\Program Files\QGIS 3.38.3\bin.
+In dat geval is er nog wat werke aan de winkel. Zet het path naar QGIS (waar ogr2ogr in zit) in de environment variables, zodat we de commandline tools kunnen gebruiken. Zoek in de verkenner op waar QGIS geïnstalleerd staat. 
 
-kan via Control panel - System - Edit the system Environment Variables - Environment Variables... - System Variables - Path of via de commandline:
+Voorbeeld: _C:\Program Files\QGIS 3.40\bin_
 
-set PATH=%PATH%;C:\Program Files\QGIS 3.38.3\bin
+Laten we dat dan direct via de commandline goed zetten:
 
-Check:
+`set PATH=%PATH%;"C:\Program Files\QGIS 3.40\bin"`
 
-ogr2ogr --version
-GDAL 3.9.2, released 2024/08/13
+**N.B.** Let op de dubbele quotes in het commando: als er spaties in het pad staan (b.v. Program Files) is dit een must!
+Check nu nog een keer door in te tikken:
+
+`ogr2ogr`
+
+Je krijgt nu een stuk code terug, die eindigt met een FAILURE melding:
+![ogr2ogr werkt](ogr2ogr_werkt.png)
+
+Dat is goed nieuws: ogr2ogr werkt! We kunnen beginnen ...
+
