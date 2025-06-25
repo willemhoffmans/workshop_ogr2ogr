@@ -6,18 +6,18 @@ In dit deel gaan we een shapefile in een geopackage importeren. Dit gaat, zoals 
 
 Allereerst even de syntax van ogr2ogr erbij halen. Het commando is in de basis zo opgebouwd:
 
-`ogr2ogr <output> <input> [<optie1> <optie2> .... ]`
+`ogr2ogr <output> <input> [<argument1> <argumenten> .... ]`
 
 Een paar dingen hierbij:
 
 * <output> en <input> zijn verplicht, en ook in die volgorde
 * Let hierbij op de extensies. Geef die altijd mee (dus .shp voor shapefiles, .gpkg voor geopackage, enz.)
-* Alle andere opties mogen in willekeurige volgorde aan het commando worden toegevoegd. 
+* Alle andere argumenten mogen in willekeurige volgorde aan het commando worden toegevoegd. 
 
-Voor een compleet overzicht van alle opties in ogr2ogr, zie [GDAL documentatie](https://gdal.org/en/stable/programs/ogr2ogr.html)
-Al snel zullen we zien dat we een aantal van de extra opties goed kunnen gebruiken. 
+Voor een compleet overzicht van alle argumenten in ogr2ogr, zie [GDAL documentatie](https://gdal.org/en/stable/programs/ogr2ogr.html)
+Al snel zullen we zien dat we een aantal van de extra argumenten goed kunnen gebruiken. 
 
-Een optie die we meteen bij de eerste actie maar even introduceren is de `-f` optie. Hiermee bepalen we wat het uitvoerformaat moet zijn. Het is vrij gebruikelijk om deze optie vooraan in de commandoregel te zetten, in tegenstelling tot de (meeste) andere opties. Maar, zoals gezegd, hier ben je in principe vrij in. 
+Een argument dat we meteen bij de eerste actie maar even introduceren is `-f`. Hiermee bepalen we wat het uitvoerformaat moet zijn. Het is vrij gebruikelijk om dit argument vooraan in de commandoregel te zetten, in tegenstelling tot de (meeste) andere argumenten. Maar, zoals gezegd, hier ben je in principe vrij in. 
 
 Als we een geopackage maken (of een dataset eraan toe willen voegen) is dit "GPKG". Als optie krijgen we dan dus `-f "GPKG"`. Dit gaan we dus nu toepassen.
 
@@ -36,10 +36,22 @@ Als het goed is gaat de conversie redelijk snel. Laad zowel de originele shape a
 * wat is eigenlijk de tabelnaam in de geopackage? Heet ie nu "provinciegrenzen" of is het nog steeds "GRS_1000_PROV_NL_V.shp"?
 
 Om die laatste vraag goed te beantwoorden is het wel handig om in de Browser van QGIS een connectie te maken met de nieuwe database: rechts op Geopackage klikken en New Connection kiezen. Je kan dan vervolgens zien wat er in de geopackage zit. Dit komt ook verderop in de workshop wel van pas.
+
 ![QGIS Browser](/images/QGIS_browser.png)
 
+## Een paar extra argumenten
+Je ziet het: de tabel heeft nog steeds die cryptische naam. Dat moet natuurlijk anders. Gelukkig hebben we hiervoor een extra argument: `-nln`, ofwel: "new layer name". 
+Laten we dus het commando uitbreiden en de uitvoerlaag een nieuwe naam geven, bijvoorbeeld 'provinciegrenzen'. Je krijgt dan:
 
+`ogr2ogr -f "GPKG" "D:\data\test\provinciegrenzen.gpkg" "D:\data\invoer\GRS_1000_PROV_NL_V.shp" -nln provinciegrenzen`
 
-, zie je verschillen. Hoeveel objecten zitten erin? 
-Voer 't nog een keer uit, en bekijk het resultaat opnieuw. Is het resultaat overschreven? Er zijn opties -overwrite en -append. Blijkbaar is -overwrite de default.
-Andere naam geven met -nln optie. Kan dat in dezelfde database? 
+Bekijk het resultaat in de Browser van QGIS. Wat zit er nu in de geopackage? Als het goed is alléén de laag met de nieuwe naam! Op zich is dat voor nu wel handig, zijn we die lelijke naam meteen kwijt. Maar het is wel tricky: blijkbaar overschrijft ogr2ogr zonder pardon de oude laag zonder dat verder te melden. Probeer maar eens zelf uit: voer het commando nóg een keer uit, maar noem het resultaat nu provinciegrenzen2: `-nln provinciegrenzen2`. 
+
+Een fijne mogelijkheid bij een geopackage is dat je er meerdere kaartlagen (tabellen) in kwijt kan. Als we, even voor het voorbeeld van nu, een extra versie van de provnciegrenzen in de geopackage willen hebben, bijvoorbeeld om in te editen, dan hebben we nog een extra argument nodig: `- overwrite`. 
+Breid het commando nog verder uit met dit argument, en zorg ervoor dat er nog een kopie van de provinciegrenzen tabel in de geopackage komt, uiteraard onder een andere naam. Bijvoorbeeld:
+
+`ogr2ogr -f "GPKG" "D:\data\test\provinciegrenzen.gpkg" "D:\data\invoer\GRS_1000_PROV_NL_V.shp" -nln provinciegrenzen_edit -overwrite`
+
+Als dit goed is gegaan, kijk nog eens in de QGIS Browser. Zie je nu 2 tabellen in de geopackage? 
+
+![Browser 2 tabellen](/images/broser_2tabellen.png)
