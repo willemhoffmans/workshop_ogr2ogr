@@ -20,4 +20,28 @@ Importeer de gedownloade kunstwerkdelen in een geopackage; dat mag een nieuwe ge
 
 Bekijk in QGIS (kaartscherm / Browser) hoe e.e.a. eruit ziet. Alles helemaal oké? Nou , niet helemaal ...
 
+![kunstwerkdeel poging 1](images/kunstwerkdeel_ongedefinieerd.png)
 
+Er vallen twee dingen op:
+
+* In de QGIS Browser zie je aan het icoontje dat de geometrie niet duidelijk gedefinieerd is: punt, lijn en vlak bij elkaar?
+* Als je de laag in het kaartscherm in QGIS toevoegt krijg je eerst een dialoogscherm. Er zijn 2 lagen: één met lijnen en één met vlakken.
+
+In principe kán dit wel, maar een geodata beheerder wordt hier niet echt blij van. Als je de data echt een beetje netjes wil organiseren maak je daar twee lagen (tabellen) van: ééntje met vlakken en ééntje met lijnen. 
+
+## Alleen vlakken importeren
+Laten we ons even beperken tot de vlakken, en alleen deze in de geopackage importeren. Het resultaat zouden we dan bijvoorbeeld kunstwerkdeel_vlak kunnen noemen. Met ogr2ogr kunnen we dat doen door de BGT objecten te filteren met een `-where` argument: 
+
+`-where "OGR_GEOMETRY ILIKE '%polygon%'"`
+
+Als we dit als argument aan onze commandoregel toevoegen zorgen we ervoor dat alleen de objecten met een vlakgeometrie worden geïmporteerd. Stel het commando samen, zorg er meteen voor dat de tabel kunstwerkdeel_vlak heet, en voer het uit (mocht er een foutmelding over 'multipolygon' o.i.d. komen, kijk dan even bij [Troubleshooting](#Troubleshooting). Bekijk het resultaat opnieuw in de Browser en het QGIS kaartscherm. Als het goed (?) is, zie je dat het toch nog niet helemaal goed is gegaan. Nog steeds geen goed gedefinieerde geometrie, en dus een dialoogscherm als je het resultaat in de kaart wil zien. De selectie is zo te zien wél goed gegaan: je krijgt alleen de vlakken.
+
+Maar, we hebben dus nog een extra argument nodig om het écht goed te doen. Hiervoor hebben we `-nlt` (new layer type), waarmee we het geometrietype van de nieuwe laag vastleggen. Dat moeten vlakken (POLYGON) zijn, dus je moet de commandoregel hiermee uitbreiden:
+
+`-nlt POLYGON`
+
+Probeer dit eens uit, en check het resultaat opnieuw. Is het nu wel goed? 
+
+
+<a id="Troubleshooting"></a>
+## Troubleshooting: multipolygonen?
