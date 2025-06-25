@@ -44,4 +44,4 @@ Probeer dit eens uit, en check het resultaat opnieuw. Is het nu wel goed?
 
 
 <a id="Troubleshooting"></a>
-## Troubleshooting: multipolygonen?
+## Troubleshooting: multivlakken?
