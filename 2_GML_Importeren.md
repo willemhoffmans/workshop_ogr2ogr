@@ -47,5 +47,7 @@ Probeer dit eens uit, en check het resultaat opnieuw. Is het nu wel goed?
 Het kan zomaar voorkomen dat een invoerdataset een mengeling is van enkelvoudige en meervoudige (multi-) geometrieën. In het geval van vlakken: POLYGON en MULTIPOLYGON. Voor conversietools kan dat problemen opleveren, en dus ook voor ogr2ogr. Maar gelukkig zijn er ook oplossingen! Bijvoorbeeld het paardenmiddel: overal multigeometrieën van maken. Een multivlak dat maar uit één vlak bestaat is immers volkomen valide in de open standaarden. 
 
 Mocht je bij één van de commando's hierboven een foutmelding hebben gekregen die daar een beetje naar riekt, of wil je het gewoon sowieso uitproberen, importeer dan de kunstwerkdeel-vlakken als multivlak in de geopackage:
+
 `ogr2ogr "GPKG" resultaten.gpkg kunstwerkdeel.gml -overwrite -nln geefdietabeleenleukenaam -where "OGR_GEOMETRY ILIKE '%polygon%'" -nlt MULTIPOLYGON -nlt PROMOTE_TO_MULTI`
 
+Missie geslaagd?
