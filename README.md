@@ -34,7 +34,7 @@ Check vervolgens of je ogr2ogr aan de praat krijgt door in te tikken:
 `ogr2ogr`
 
 Veel kans dat je een melding krijgt dat het commando niet gevonden is:
-![command not found](ogr2ogr command not found.png)
+![command not found](images/ogr2ogr command not found.png)
 
 In dat geval is er nog wat werke aan de winkel. Zet het path naar QGIS (waar ogr2ogr in zit) in de environment variables, zodat we de commandline tools kunnen gebruiken. Zoek in de verkenner op waar QGIS geïnstalleerd staat. 
 
@@ -50,7 +50,7 @@ Check nu nog een keer door in te tikken:
 `ogr2ogr`
 
 Je krijgt nu een stuk code terug, die eindigt met een FAILURE melding:
-![ogr2ogr werkt](ogr2ogr werkt.png)
+![ogr2ogr werkt](images/ogr2ogr werkt.png)
 
 Dat is goed nieuws: ogr2ogr werkt! We kunnen beginnen ...
 
