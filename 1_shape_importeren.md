@@ -36,7 +36,7 @@ Als het goed is gaat de conversie redelijk snel. Laad zowel de originele shape a
 * wat is eigenlijk de tabelnaam in de geopackage? Heet ie nu "provinciegrenzen" of is het nog steeds "GRS_1000_PROV_NL_V.shp"?
 
 Om die laatste vraag goed te beantwoorden is het wel handig om in de Browser van QGIS een connectie te maken met de nieuwe database: rechts op Geopackage klikken en New Connection kiezen. Je kan dan vervolgens zien wat er in de geopackage zit. Dit komt ook verderop in de workshop wel van pas.
-
+![QGIS Browser](/images/QGIS_browser.png)
 
 
 
