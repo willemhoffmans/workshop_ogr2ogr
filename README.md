@@ -20,7 +20,7 @@ We gaan er bij de workshop vanuit dat je een laptop hebt waar ogr2ogr op geïnst
 
 ogr2ogr is een commandline tool, en het verdient dan ook de voorkeur om 'm via de commandline (Windows: cmd) te gebruiken. De Processing Toolbox van QGIS biedt 'm echter ook aan, zie hieronder. 
 
-![toolbox](plaatjes/toolbox.png)
+![toolbox](images/toolbox.png)
 
 
 
