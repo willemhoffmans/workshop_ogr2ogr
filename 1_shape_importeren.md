@@ -45,7 +45,7 @@ Laten we dus het commando uitbreiden en de uitvoerlaag een nieuwe naam geven, bi
 
 `ogr2ogr -f "GPKG" "D:\data\test\provinciegrenzen.gpkg" "D:\data\invoer\GRS_1000_PROV_NL_V.shp" -nln provinciegrenzen`
 
-Bekijk het resultaat in de Browser van QGIS. Wat zit er nu in de geopackage? Als het goed is alléén de laag met de nieuwe naam! Op zich is dat voor nu wel handig, zijn we die lelijke naam meteen kwijt. Maar het is wel tricky: blijkbaar overschrijft ogr2ogr zonder pardon de oude laag zonder dat verder te melden. Probeer maar eens zelf uit: voer het commando nóg een keer uit, maar noem het resultaat nu provinciegrenzen2: `-nln provinciegrenzen2`. 
+Bekijk het resultaat in de Browser van QGIS, vergeet niet de _Refresh_ knop om de inhoud bij te werken. Wat zit er nu in de geopackage? Als het goed is alléén de laag met de nieuwe naam! Op zich is dat voor nu wel handig, zijn we die lelijke naam meteen kwijt. Maar het is wel tricky: blijkbaar overschrijft ogr2ogr zonder pardon de oude laag zonder dat verder te melden. Probeer maar eens zelf uit: voer het commando nóg een keer uit, maar noem het resultaat nu provinciegrenzen2: `-nln provinciegrenzen2`. 
 
 Een fijne mogelijkheid bij een geopackage is dat je er meerdere kaartlagen (tabellen) in kwijt kan. Als we, even voor het voorbeeld van nu, een extra versie van de provnciegrenzen in de geopackage willen hebben, bijvoorbeeld om in te editen, dan hebben we nog een extra argument nodig: `- overwrite`. 
 Breid het commando nog verder uit met dit argument, en zorg ervoor dat er nog een kopie van de provinciegrenzen tabel in de geopackage komt, uiteraard onder een andere naam. Bijvoorbeeld:
