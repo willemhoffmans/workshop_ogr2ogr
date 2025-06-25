@@ -15,3 +15,5 @@ Het laatste hangt af van hoe PostgreSQL geconfigureerd is. Als je bijvoorbeeld i
 Uiteraard is het wel belangrijk dat je de benodigde rechten op de database hebt. 
 
 Als je in je database meerdere schema's hebt, zul je ook de schemanaam in je resultaten op moeten geven bij gebruik van het `-nln` argument.
+
+[Terug naar de workshop](./README.md)
