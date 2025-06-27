@@ -53,11 +53,28 @@ Zoals we al hadden gezien bevat de BAG webservice ook woonplaatsen. In principe 
 
 `-sql "SELECT pand.* FROM pand JOIN woonplaats ON ST_Within(pand.geom, woonplaats.geom) WHERE pand.bouwjaar < 1600 AND woonplaats.woonplaats = 'Utrecht'"`
 
-Kijk eens of het met dit filter lukt. 
+Kijk eens of het met dit filter lukt. Zie hier het (vermoedelijke) resultaat:
 
+![error ruimtelijke query](images/error_ruimtelijke_query.png)
 
+Da's nou jammer. Met die query is niet zo veel mis, en de lagen en bijbehorende attributen worden echt allemaal geserveerd. En tóch lukt het niet? 
+De clou zit 'm in de [Capabilities](https://service.pdok.nl/lv/bag/wfs/v2_0?request=GetCapabilities) van de BAG webservice! Hier vinden we dit terug:
 
-* Dit zal wel lukken
-* Combi met woonplaatsen: ruimtelijke join met één woonplaats. Foutmeldingen. Capabilities document.
-* oude panden in één gemeente: identificatie like ´'
-* ODR opendata: wél een ruimtelijke query
+![no spatial joins](images/capabilities_bag_joins.png)
+
+Deze service faciliteert geen ruimtelijke koppelingen (joins), en dus ook geen ruimtelijk filter m.b.v. een andere laag. Overigens ook geen 'gewone' joins zoals je ziet. 
+
+Dan rest ons helaas alleen de optie om het SQL-filter te verfijnen met iets uit de attribuuttabel van de panden zelf. Bijvoorbeeld het veld _identificatie_: dat begint met iets dat verdacht veel lijkt op een gemeentecode. Bijvoorbeeld: 0344 = Utrecht. Probeer met een goed ogr2ogr commando de historische panden van één gemeente op te halen door er een SQL-filter op te zetten dat filtert op bouwjaar én identificatie. Dit zou wel moeten lukken ...
+
+## Omgevingsdienst Rivierenland: ruimtelijk filteren
+Dan dus maar op zoek naar een WFS-service die wél ruimtelijke filters faciliteert, zodat we alsnog kunnen testen of we zo'n ruimtelijk filter in ogr2ogr kunnen gebruiken. De Omgevingsdienst Rivierenland heeft wel zo'n service: [ODR Opendata](https://odr.tailormap.nl/geoserver/opendata/wfs?request=GetCapabilities). Zoek in het Capabilities document eens op de term "ImplementsSpatialJoins". Mooi! 
+
+Haal met ogr2ogr eerst eens alle ippc_bedrijven uit deze webservice naar je database. Het zijn er slechts enkele tientallen en het is een snelle service, dus die heb je zo binnen. Bekijk hoe dit eruit ziet. 
+
+En dan nu met een ruimtelijk filter! De webservice bevat ook een laag _gemeenten_odr_. Gebruik deze om de ippc_bedrijven uit één gemeente binnen te halen. Bijvoorbeeld:
+` -sql "SELECT i.* FROM ippc_bedrijven i JOIN gemeenten_odr g ON ST_Within(i.geom, g.geom) WHERE g.gemeentenaam = 'Maasdriel'"`
+
+Het resulaat? 
+
+![ippc Maasdriel](images/ippc_maasdriel.png)
+
