@@ -1,5 +1,7 @@
 # Deel 1: een shapefile importeren
 
+## Inleiding 
+
 In dit deel gaan we een shapefile in een geopackage importeren. Dit gaat, zoals we zullen zien, redelijk rechttoe rechtaan. Maar, al gauw komen we erachter dat er toch wat extra tuning nodig is als je het nét ietsjes anders wil.  
 
 ## De ogr2ogr syntax
