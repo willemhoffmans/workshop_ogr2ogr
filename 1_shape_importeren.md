@@ -13,7 +13,7 @@ Allereerst halen we even de syntax van _ogr2ogr_ erbij. Het commando is in de ba
 Een paar dingen hierbij:
 
 * `<output>` en `<input>` zijn verplicht, en ook in die volgorde.
-* Let hierbij op de extensies. Geef die altijd mee (dus .shp voor shapefiles, .gpkg voor geopackage, enz.).
+* Let hierbij op de extensies. Geef die altijd mee (dus _.shp_ voor shapefiles, _.gpkg_ voor geopackage, enz.).
 * Alle andere argumenten mogen in willekeurige volgorde aan het commando worden toegevoegd. 
 
 Voor een compleet overzicht van alle argumenten in ogr2ogr, zie [GDAL documentatie](https://gdal.org/en/stable/programs/ogr2ogr.html)
