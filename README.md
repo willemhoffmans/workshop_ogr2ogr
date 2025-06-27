@@ -53,4 +53,4 @@ Je krijgt nu een stuk code terug, die eindigt met een FAILURE melding:
 
 Dat is goed nieuws: ogr2ogr werkt! Het feest kan beginnen ...
 
-[hier](./ogr2ogr_postgis.md)
+[Deel 1: shape importeren](./1_shape_importeren.md)
