@@ -36,7 +36,7 @@ Check vervolgens of je ogr2ogr aan de praat krijgt door in te tikken:
 Veel kans dat je een melding krijgt dat het commando niet gevonden is:
 ![command not found](images/ogr2ogr_command_not_found.png)
 
-In dat geval is er nog wat werke aan de winkel. Zet het path naar QGIS (waar ogr2ogr in zit) in de environment variables, zodat we de commandline tools kunnen gebruiken. Zoek in de verkenner op waar QGIS geïnstalleerd staat. 
+In dat geval is er nog wat werk aan de winkel. Zet het path naar QGIS (waar ogr2ogr in zit) in de environment variables, zodat we de commandline tools kunnen gebruiken. Zoek in de verkenner op waar QGIS geïnstalleerd staat. 
 
 Voorbeeld: _C:\Program Files\QGIS 3.40\bin_
 
