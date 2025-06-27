@@ -3,7 +3,7 @@
 ## Intro
 Datasets vanaf je eigen harde schijf in een geopackage of andere database importeren met ogr2ogr is handig, maar er is veel meer. Bijvoorbeeld direct data ophalen vanuit een webservice (WFS, OGC-API of ArcGIS REST) via één commandoregel. Om dat dan bijvoorbeeld in een script te stoppen dat deze dataset elke dag actualiseert. 
 
-In dit deel van de workshop gaan we uitvinden hoe dat werkt. We houden het bij het ophalen van data uit een paar relatief betrouwbare en niet al te moeilijke WFS services, daar komt al aardig wat bij kijken. Ga je snel en voel je je uitgedaagd, probeer gerust andere opties en services uit. Zit je verlegen om extra opties, shop dan in de [documentatie](https://gdal.org/en/stable/programs/ogr2ogr.html) of er mogelijkheden bij zitten om een ander nog meer naar je hand te zetten.
+In dit deel van de workshop gaan we uitvinden hoe dat werkt. We houden het bij het ophalen van data uit een paar relatief betrouwbare en niet al te moeilijke WFS services, daar komt al aardig wat bij kijken. Ga je snel en voel je je uitgedaagd, probeer gerust andere opties en services uit. Wil het niet zo lukken, shop dan in de [documentatie](https://gdal.org/en/stable/programs/ogr2ogr.html) of er extra argumenten zijn waarmee je een en ander naar je hand te zetten.
 
 Een paar tips vooraf:
 
@@ -12,16 +12,16 @@ Een paar tips vooraf:
 
 ## Gemeentegrenzen 
 Laten we beginnen met het naar binnen hengelen van de gemeentegrenzen van het kadaster. De URL van de service is: `https://service.pdok.nl/kadaster/bestuurlijkegebieden/wfs/v1_0?`
-Het ogr2ogr commando wordt dan zoiets zou je zeggen:
+Het ogr2ogr commando wordt dan zoiets:
 
 `ogr2ogr "D:\data\test\resultaten.gpkg" WFS:"https://service.pdok.nl/kadaster/bestuurlijkegebieden/wfs/v1_0?" -overwrite -nln gemeenten_kadaster`
 
-Het bekende recept: bekijk in QGIS of e.e.a. helemaal oké is. Vermoedelijk komen er wat typische problemen die we in Deel 2 ook al zagen, zoals ongedefinieerde geometrie; probeer dit op te lossen door het commando aan te passen.
+Het bekende recept: bekijk in QGIS of e.e.a. helemaal oké is. Vermoedelijk komen er wat typische problemen die we in [Deel 2](2_GML_Importeren.md) ook al zagen, zoals ongedefinieerde geometrie; probeer dit op te lossen door het commando aan te passen.
 
 ## BAG panden: BBOX
 Als het met de gemeentegrenzen goed is gegaan, kunnen we ook wel wat panden uit de BAG gaan binnenhalen. Maar, uiteraard niet alle 10 miljoen panden van heel Nederland! Dat gaat gegarandeerd niet goed ...
 
-Eén van de opties die je bij een WFS service kan gebruiken is de BBOX. Hiermee haal je uit een grote dataset alleen de objecten binnen die binnen een bepaalde rechthoek (Bounding Box) vallen, en daarmee kun je het aantal objecten drastisch beperken. De BBOX optie moet in de WFS-string worden ingebakken en komt direct ná de URL, je krijgt dus zoiets:
+Eén van de opties die je bij een WFS service kan gebruiken is de `BBOX. Hiermee haal je uit een grote dataset alleen de objecten binnen die binnen een bepaalde rechthoek (Bounding Box) vallen, en daarmee kun je het aantal objecten drastisch beperken. De BBOX optie moet in de WFS-string worden ingebakken en komt direct ná de URL en het vraagteken, je krijgt dus zoiets:
 
 `ogr2ogr /home/willem/test/resultaten.gpkg WFS:"https://service.pdok.nl/lv/bag/wfs/v2_0?bbox=136000,456000,137000,457000" -overwrite -nln pand -nlt polygon`
 
@@ -43,6 +43,19 @@ Er is echter een grote 'maar', en dat is dat je, zo gauw je een SQL-filter gebru
 
 Laten we eens proberen de historische panden binnen te halen: alleen die met een bouwjaar vóór 1400. 
 Probeer uit één van de vorige commandoregels een nieuwe regel samen te stellen. Als extra argument hebben we nu '-sql' nodig: `-sql "SELECT * FROM pand WHERE bouwjaar < 1400"`
+
+Als dit gelukt is zie je alle panden van vóór 1400 over heel Nederland, zelfs een pand uit het jaar 20 in Den Dungen. Stel dat je tóch ook een ruimtelijke beperking wil, dan zijn er nog 2 mogelijkheden:
+
+* een ruimtelijk filter binnen de webservice toepassen
+* het filter inhoudelijk aanscherpen
+
+Zoals we al hadden gezien bevat de BAG webservice ook woonplaatsen. In principe kun je met een SQL-filter in ogr2ogr ook een ruimtelijk filter toepassen. Da's mooi, want dan zouden we bijvoorbeeld de historische panden in één woonplaats kunnen binnenhalen. Zo'n SQL expressie wordt dan uiteraard wel wat gecompliceerder, bijvoorbeeld voor het binnenhalen van alle panden van vóór 1600 in Utrecht:
+
+`-sql "SELECT pand.* FROM pand JOIN woonplaats ON ST_Within(pand.geom, woonplaats.geom) WHERE pand.bouwjaar < 1600 AND woonplaats.woonplaats = 'Utrecht'"`
+
+Kijk eens of het met dit filter lukt. 
+
+
 
 * Dit zal wel lukken
 * Combi met woonplaatsen: ruimtelijke join met één woonplaats. Foutmeldingen. Capabilities document.
